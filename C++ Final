@@ -3,17 +3,53 @@
 #include <fstream>
 #include <cstdlib>
 #include <string>
+#include <list>
+#include <iterator>
+#include <algorithm>
+
+
+
 
 
 using namespace std;
+int x;
 int main();
 void menu();
 void info();
 
 
+void delay(int a)
+{
+    int add, time, x;
+
+    time = a * 100000000000000;
+
+    for (x = 0; x < time; x++)
+    {
+        add = 1;
+        add *= x;
+        add++;
+        add++;
+    }
+}
+
+
+
+
+int booklist()
+{
+    const char *colour[5] = {"1: War and Peace by Leo Tolstoy", "2: Anna Karenina by Leo Tolstoy", "3: Don Quixote by Miguel de Cervantes", "4: Madame Bovary by Gustave Flaubert", "5: Middlemarch by George Eliot"};
+ 
+    // Printing Strings stored in 2D array
+    for (int i = 0; i < 5; i++)
+        std::cout << colour[i] << "\n";
+ 
+    return 0;
+}
+
 bool backside(int a)
 {
-    string username, password, user, pass, book, inorout;
+    string username, password, user, pass, book, number, item;
     
     if (a == 1)
     {
@@ -64,8 +100,46 @@ bool backside(int a)
     }
     else if (a == 2)
     {
-        cout << "What book will you be checking out?: ";
-        cin >> book;
+        cout << "What book will you be checking out?: " << endl;
+        booklist();
+        cin >> item;
+        if (item == "1")
+        {
+            book = "War and Peace by Leo Tolstoy";
+            cout << book << " has successfully been checked out. See you soon!" << endl;
+        main();
+        }
+        
+        else if (item == "2")
+        {
+            book = "Anna Karenina by Leo Tolstoy";
+            cout << book << " has successfully been checked out. See you soon!" << endl;
+        main();
+        }
+        
+        else if (item == "3")
+        {
+            book = "Don Quixote by Miguel de Cervantes";
+            cout << book << " has successfully been checked out. See you soon!" << endl;
+        main();
+        }
+        
+        else if (item == "4")
+        {
+            book = "Madame Bovary by Gustave Flaubert";
+            cout << book << " has successfully been checked out. See you soon!" << endl;
+        main();
+        }
+        else if (item == "5")
+        {
+            book = "Middlemarch by George Eliot";
+            cout << book << " has successfully been checked out. See you soon!" << endl;
+        main();
+        }
+        
+        
+        
+        
         cout << book << " has successfully been checked out. See you soon!" << endl;
         main();
     }
@@ -84,6 +158,11 @@ int main()
     cout << "**************  Loading  **************" << endl;
     cout << "***************************************" << endl;
     
+    int x;
+    srand(time(NULL));
+    x = rand() % 10000000000;
+    delay(x);
+    
     menu();
 }
 
@@ -98,6 +177,11 @@ void info()
     cin >> menu2;
     cout << "Thank you, one moment please." << endl << endl << endl << endl;
     
+    int x;
+    srand(time(NULL));
+    x = rand() % 10000000000;
+    delay(x);
+    
     bool status = backside(menu2);
 }
 
@@ -105,7 +189,7 @@ void menu()
 {
     int y;
     int mainmenu; 
-    cout << endl << endl << endl << endl << endl;
+    cout << endl << endl << endl << endl;
     
     cout << "1: Sign Up" << endl;
     cout << "2: Login" << endl;
@@ -154,6 +238,10 @@ void menu()
     else if (mainmenu == 3)
     {
         cout << "Goodbye" << endl;
+        int x;
+        srand(time(NULL));
+        x = rand() % 10000000000;
+        delay(x);
         exit(EXIT_SUCCESS);
     }
     else cout << endl << endl << endl << endl << "Invalid input, please try again";
