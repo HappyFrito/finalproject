@@ -1,0 +1,169 @@
+#include <iostream>
+#include <ctime>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+
+
+using namespace std;
+int main();
+void menu();
+void info();
+
+
+bool backside(int a)
+{
+    string username, password, user, pass, book, inorout;
+    
+    if (a == 1)
+    {
+        int logged = 0;
+        cout << "Please Enter Your Username: ";
+        cin >> username;
+        cout << "Please Enter Your Password: ";
+        cin >> password;
+        
+        
+        
+        ifstream input("userbase.txt");
+        while (input >> user >> pass)
+        {
+            if(user == username && pass == password)
+            {
+                logged = 5;
+                info();
+            }
+        }
+        input.close();
+        
+        if (logged == 5)
+        {
+            cout << "Logged In Successfully";
+            cin.get();
+            cin.get();
+            info();
+        }
+        else if (logged != 5)
+        {
+            cout << endl << "Wrong Password or Username" << endl;
+            
+            ofstream reg("failedlogins.txt", ios::app);
+            reg << username << "    " << password << endl;
+            
+            main();
+        }
+    }
+    else if (a ==3)
+    {
+        cout << "What book will you be returning?: ";
+            cin >> book;
+            cout << "Book Successfully Returned!";
+            ofstream reg("inventory.txt", ios::app);
+            reg << book << endl;
+            main();
+    }
+    else if (a == 2)
+    {
+        cout << "What book will you be checking out?: ";
+        cin >> book;
+        cout << book << " has successfully been checked out. See you soon!" << endl;
+        main();
+    }
+    else if (a == 4)
+    {
+        main();
+    }
+    return 0;
+}
+
+int main()
+{
+    cout << endl << endl << endl << endl << endl << endl << endl << endl;
+    cout << "***************************************" << endl;
+    cout << "************** Main Menu **************" << endl;
+    cout << "**************  Loading  **************" << endl;
+    cout << "***************************************" << endl;
+    
+    menu();
+}
+
+void info()
+{
+    int menu2;
+    
+    cout << "Please Select An Option" << endl;
+    cout << "2: Check Out a Book" << endl;
+    cout << "3: Return a book" << endl;
+    cout << "4: Sign Out" << endl;
+    cin >> menu2;
+    cout << "Thank you, one moment please." << endl << endl << endl << endl;
+    
+    bool status = backside(menu2);
+}
+
+void menu()
+{
+    int y;
+    int mainmenu; 
+    cout << endl << endl << endl << endl << endl;
+    
+    cout << "1: Sign Up" << endl;
+    cout << "2: Login" << endl;
+    cout << "3: Exit" << endl;
+    cout << "Please enter the number associated with your choice: ";
+    cin >> mainmenu;
+    
+    if (mainmenu == 1)
+    {
+        string username, password;
+        
+        cout << "Please Choose A Username: ";
+        cin >> username;
+        cout << "Please Choose A Password: ";
+        cin >> password;
+        
+        
+        ofstream reg("userbase.txt", ios::app);
+        reg << username << "    " << password << endl;
+        
+        cout << endl << endl << endl << endl << "Sign-Up Successfull" << endl << endl << endl;
+        
+        main();
+        
+    }
+    
+    else if (mainmenu == 2)
+    {
+        bool status = backside(1);
+        
+        
+        
+        if (!status)
+        {
+            y = 0;
+            cout << endl << endl << endl << endl;
+            main();
+        }
+        else
+        {
+            y = 5;
+            cout << endl << endl << endl << endl;
+            info();
+        }
+    }
+    else if (mainmenu == 3)
+    {
+        cout << "Goodbye" << endl;
+        exit(EXIT_SUCCESS);
+    }
+    else cout << endl << endl << endl << endl << "Invalid input, please try again";
+    main();
+}
+
+
+
+
+
+
+
+
